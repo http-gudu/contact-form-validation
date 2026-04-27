@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Contact form</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body><form id="contactForm">
+  <div class="contact-us">
+    <h2>contact us</h2>
+
+    <div class="name">
+      <div class="first-name">
+        <label>First Name</label><br>
+        <input type="text" id="firstName">
+        <small class="error"></small>
+      </div>
+
+      <div class="second-name">
+        <label>Second Name</label><br>
+        <input type="text" id="secondName">
+        <small class="error"></small>
+      </div>
+    </div>
+
+    <div class="email">
+      <label>Email</label><br>
+      <input type="email" id="email">
+      <small class="error"></small>
+    </div>
+
+    <div class="query">
+      <input type="checkbox" id="general"> General query
+      <input type="checkbox" id="support"> Support query
+      <small class="error"></small>
+    </div>
+
+    <div class="msg">
+      <label>Message</label><br>
+      <textarea id="msg"></textarea>
+      <small class="error"></small>
+    </div>
+
+    <div>
+      <input type="checkbox" id="declaration">
+      I consent to being contacted
+      <small class="error"></small>
+    </div>
+
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<div id="successBox">✅ Thank you for filling the form!</div>
+
+
+<script>
+  const form = document.getElementById("contactForm");
+  const successBox = document.getElementById("successBox");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let isValid = true;
+
+    const firstName = document.getElementById("firstName");
+    const secondName = document.getElementById("secondName");
+    const email = document.getElementById("email");
+    const msg = document.getElementById("msg");
+    const declaration = document.getElementById("declaration");
+
+    document.querySelectorAll(".error").forEach(el => el.innerText = "");
+
+  if (firstName.value.trim() === "") {
+    firstName.nextElementSibling.innerText = "First name required";
+    isValid = false;
+  }
+
+  if (secondName.value.trim() === "") {
+    secondName.nextElementSibling.innerText = "Second name required";
+    isValid = false;
+  }
+
+  if (email.value.trim() === "") {
+    email.nextElementSibling.innerText = "Email required";
+    isValid = false;
+  }
+
+  if (msg.value.trim() === "") {
+    msg.nextElementSibling.innerText = "Message required";
+    isValid = false;
+  }
+
+  if (!declaration.checked) {
+    declaration.nextElementSibling.nextElementSibling.innerText = "You must agree";
+    isValid = false;
+  }
+
+  if (isValid) {
+    successBox.style.display = "block";
+
+    setTimeout(() => {
+      successBox.style.display = "none";
+    }, 3000);
+
+    form.reset();
+  }
+  })
+</script>
+</body>
+</html>
